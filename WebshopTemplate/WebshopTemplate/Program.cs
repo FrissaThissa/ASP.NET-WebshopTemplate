@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebshopTemplate.Areas.Identity.Data;
 using WebshopTemplate.Data;
+using WebshopTemplate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("WebshopTemplateContextConnection");
@@ -11,6 +12,8 @@ builder.Services.AddDefaultIdentity<WebshopTemplateUser>(options => options.Sign
     .AddEntityFrameworkStores<WebshopTemplateContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

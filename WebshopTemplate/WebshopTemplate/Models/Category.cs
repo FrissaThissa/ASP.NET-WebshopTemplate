@@ -7,6 +7,6 @@ namespace WebshopTemplate.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public Category ParentCategory { get; set; }
+        public Category? ParentCategory { get; set; }
     }
 }

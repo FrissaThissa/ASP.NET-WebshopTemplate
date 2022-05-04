@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebshopTemplate.Models;
+using WebshopTemplate.ViewModels;
+using WebshopTemplate.Services;
 
 namespace WebshopTemplate.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICategoryService _categoryService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICategoryService categoryService)
         {
             _logger = logger;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(new HomeViewModel_Default(_categoryService));
         }
 
         public IActionResult Privacy()

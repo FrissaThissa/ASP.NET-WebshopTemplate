@@ -1,0 +1,24 @@
+﻿@model WebshopTemplate.ViewModels.ViewModelBase_Default
+
+@{
+    if(Model != null && Model.Categories != null){
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            @{
+                                foreach(Category category in Model.Categories)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Products" asp-action="Index">@category.Name</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+}

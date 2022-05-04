@@ -1,6 +1,10 @@
-﻿@{
+﻿@model WebshopTemplate.ViewModels.HomeViewModel_Default
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<partial name="_CategoryHeader" model="Model"/>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
