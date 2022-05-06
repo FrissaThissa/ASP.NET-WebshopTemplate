@@ -56,15 +56,17 @@ namespace WebshopTemplate.Services
                             {
                                 //based on the upload file to create Photo instance.
                                 //You can also check the database, whether the image exists in the database.
-                                var newphoto = new Image()
+                                var bytes = memoryStream.ToArray();
+                                var image = new Image()
                                 {
-                                    Bytes = memoryStream.ToArray(),
+                                    Bytes = bytes,
                                     Description = formFile.FileName,
                                     FileExtension = Path.GetExtension(formFile.FileName),
                                     Size = formFile.Length,
+                                    Base64 = Convert.ToBase64String(bytes)
                                 };
                                 //add the photo instance to the list.
-                                images.Add(newphoto);
+                                images.Add(image);
                             }
                         }
                     }

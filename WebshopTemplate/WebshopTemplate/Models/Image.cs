@@ -10,5 +10,6 @@ namespace WebshopTemplate.Models
         public string Description { get; set; }
         public string FileExtension { get; set; }
         public decimal Size { get; set; }
+        public string Base64 { get; set; }
     }
 }

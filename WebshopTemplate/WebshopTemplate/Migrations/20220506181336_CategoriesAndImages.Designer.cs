@@ -12,8 +12,8 @@ using WebshopTemplate.Data;
 namespace WebshopTemplate.Migrations
 {
     [DbContext(typeof(WebshopTemplateContext))]
-    [Migration("20220504124134_categorymig")]
-    partial class categorymig
+    [Migration("20220506181336_CategoriesAndImages")]
+    partial class CategoriesAndImages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -248,6 +248,43 @@ namespace WebshopTemplate.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("WebshopTemplate.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Base64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Bytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Size")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Image");
+                });
+
             modelBuilder.Entity("WebshopTemplate.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -327,6 +364,18 @@ namespace WebshopTemplate.Migrations
                         .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
+                });
+
+            modelBuilder.Entity("WebshopTemplate.Models.Image", b =>
+                {
+                    b.HasOne("WebshopTemplate.Models.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("WebshopTemplate.Models.Product", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

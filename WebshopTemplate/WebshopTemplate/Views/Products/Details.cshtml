@@ -26,7 +26,7 @@
     </dl>
     @foreach(Image image in Model.Images)
     {
-        string imagesrc = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(image.Bytes));
+        string imagesrc = string.Format("data:image/png;base64,{0}", image.Base64);
         <img src="@imagesrc" style="width:100px;height:100px;"/>
     }
 </div>
