@@ -12,7 +12,7 @@ namespace WebshopTemplate.ViewModels
         public ProductOverviewViewModel_Default(IProductService productService, ICategoryService categoryService) : base(categoryService)
         {
             _productService = productService;
-            Products = new List<Product>();
+            Products = _productService.GetAllProducts();
         }
     }
 }

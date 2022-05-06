@@ -30,8 +30,9 @@ namespace WebshopTemplate.Controllers
         // GET: Products
         public async Task<IActionResult> Index([FromQuery] ProductFilter filter)
         {
-            ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
-            return View("Index_Customer", model);
+            //ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
+            return View(_productService.GetAllProducts());
+            //return View("Index_Customer", model);
         }
 
         // GET: Products/Details/5
@@ -43,6 +44,7 @@ namespace WebshopTemplate.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -63,10 +65,11 @@ namespace WebshopTemplate.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Product product)
+        public async Task<IActionResult> Create([FromForm] Product product)
         {
             if (ModelState.IsValid)
             {
+                _productService.HandleProductImages(product);
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -24,6 +24,11 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+    @foreach(Image image in Model.Images)
+    {
+        string imagesrc = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(image.Bytes));
+        <img src="@imagesrc" style="width:100px;height:100px;"/>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

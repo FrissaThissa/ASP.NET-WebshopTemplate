@@ -10,5 +10,6 @@ namespace WebshopTemplate.Services
         public Product GetProductById(int id);
         public void CreateProduct();
         public List<Product> GetProductsByFilter(ProductFilter filter);
+        public void HandleProductImages(Product product);
     }
 }
