@@ -8,22 +8,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebshopTemplate.Data;
 using WebshopTemplate.Models;
+using WebshopTemplate.Services;
+using WebshopTemplate.Filters;
+using WebshopTemplate.ViewModels;
 
 namespace WebshopTemplate.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly WebshopTemplateContext _context;
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public ProductsController(WebshopTemplateContext context)
+        public ProductsController(WebshopTemplateContext context, IProductService productService, ICategoryService categoryService)
         {
             _context = context;
+            _productService = productService;
+            _categoryService = categoryService;
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] ProductFilter filter)
         {
-            return View(await _context.Products.ToListAsync());
+            ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
+            return View("Index_Customer", model);
         }
 
         // GET: Products/Details/5

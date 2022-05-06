@@ -1,0 +1,21 @@
+﻿@model WebshopTemplate.ViewModels.ProductOverviewViewModel_Default;
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>All products</h1>
+<div>
+    <div>
+        Filter
+    </div>
+    <div>
+        <ul>
+            @foreach(Product product in Model.Products)
+            {
+                <li>@product.Name</li>
+            }
+        </ul>
+    </div>
+</div>

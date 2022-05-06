@@ -1,4 +1,5 @@
-﻿using WebshopTemplate.Models;
+﻿using WebshopTemplate.Filters;
+using WebshopTemplate.Models;
 
 namespace WebshopTemplate.Services
 {
@@ -8,5 +9,6 @@ namespace WebshopTemplate.Services
         public List<Product> GetProductsByCategory(Category category);
         public Product GetProductById(int id);
         public void CreateProduct();
+        public List<Product> GetProductsByFilter(ProductFilter filter);
     }
 }
