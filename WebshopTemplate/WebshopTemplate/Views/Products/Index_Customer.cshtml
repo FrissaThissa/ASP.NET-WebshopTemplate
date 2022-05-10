@@ -1,4 +1,4 @@
-﻿@model WebshopTemplate.ViewModels.ProductOverviewViewModel_Default;
+﻿@model WebshopTemplate.ViewModels.Products.ProductOverviewViewModel_Default;
 
 @{
     ViewData["Title"] = "Products";
@@ -6,15 +6,21 @@
 }
 
 <h1>All products</h1>
-<div>
-    <div>
+<div class="row">
+    <div class="col-md-3 border-right">
         Filter
     </div>
-    <div>
-        <ul>
+    <div class="col-md-9">
+        <ul class="list-unstyled row">
             @foreach(Product product in Model.Products)
             {
-                <li>@product.Name</li>
+                <li class="col-md-3">
+                    <div class="productcard text-center border rounded">
+                        <a asp-action="Details" asp-route-id="@product.Id" />
+                        <img src="@string.Format("data:image/png;base64,{0}", product.Images[0].Base64)" style="width:100px;height:100px;"/>
+                        <p>@product.Name</p>
+                    </div>
+                </li>
             }
         </ul>
     </div>

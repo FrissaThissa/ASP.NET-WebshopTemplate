@@ -1,0 +1,32 @@
+﻿@model WebshopTemplate.ViewModels.Products.ProductDetailViewModel_Default;
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+    </dl>
+    @foreach(Image image in Model.Product.Images)
+    {
+        string imagesrc = string.Format("data:image/png;base64,{0}", image.Base64);
+        <img src="@imagesrc" style="width:100px;height:100px;"/>
+    }
+</div>

@@ -1,6 +1,7 @@
 ﻿using WebshopTemplate.Models;
 using WebshopTemplate.Filters;
 using WebshopTemplate.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebshopTemplate.Services
 {
@@ -20,7 +21,7 @@ namespace WebshopTemplate.Services
 
         public List<Product> GetAllProducts()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(p => p.Images).ToList();
         }
 
         public Product GetProductById(int id)

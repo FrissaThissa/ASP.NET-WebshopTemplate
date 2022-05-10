@@ -2,9 +2,9 @@
 
 namespace WebshopTemplate.ViewModels
 {
-    public class HomeViewModel_Default : ViewModelBase_Default
+    public class HomeViewModel_Default
     {
-        public HomeViewModel_Default(ICategoryService categoryService) : base(categoryService)
+        public HomeViewModel_Default(ICategoryService categoryService)
         {
 
         }

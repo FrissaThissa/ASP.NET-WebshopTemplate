@@ -3,6 +3,7 @@ using System.Diagnostics;
 using WebshopTemplate.Models;
 using WebshopTemplate.ViewModels;
 using WebshopTemplate.Services;
+using WebshopTemplate.ViewModels.Layout;
 
 namespace WebshopTemplate.Controllers
 {

@@ -46,3 +46,8 @@ button.accept-policy[b-32hf4zzymw] {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.productcard a[b-32hf4zzymw] {
+    width: 100px;
+    height: 100px;
+}

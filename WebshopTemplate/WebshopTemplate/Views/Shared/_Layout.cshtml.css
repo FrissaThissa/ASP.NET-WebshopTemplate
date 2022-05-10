@@ -46,3 +46,8 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.productcard a {
+    width: 100px;
+    height: 100px;
+}

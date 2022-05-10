@@ -11,6 +11,8 @@ using WebshopTemplate.Models;
 using WebshopTemplate.Services;
 using WebshopTemplate.Filters;
 using WebshopTemplate.ViewModels;
+using WebshopTemplate.ViewModels.Products;
+using WebshopTemplate.ViewModels.Layout;
 
 namespace WebshopTemplate.Controllers
 {
@@ -30,9 +32,8 @@ namespace WebshopTemplate.Controllers
         // GET: Products
         public async Task<IActionResult> Index([FromQuery] ProductFilter filter)
         {
-            //ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
-            return View(_productService.GetAllProducts());
-            //return View("Index_Customer", model);
+            ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
+            return View("Index_Customer", model);
         }
 
         // GET: Products/Details/5
@@ -51,7 +52,9 @@ namespace WebshopTemplate.Controllers
                 return NotFound();
             }
 
-            return View(product);
+            ProductDetailViewModel_Default model = new ProductDetailViewModel_Default(_categoryService, product);
+
+            return View("Details_Customer", model);
         }
 
         // GET: Products/Create
