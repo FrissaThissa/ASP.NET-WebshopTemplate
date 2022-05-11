@@ -16,6 +16,9 @@ namespace WebshopTemplate.Models
         public string? Size { get; set; }
         public List<Image>? Images { get; set; }
 
+        public List<Cart>? Carts { get; set; }
+        public List<Wishlist>? Wishlists { get; set; }
+
         [FromForm]
         [NotMapped]
         public IFormFileCollection? Files { get; set; }

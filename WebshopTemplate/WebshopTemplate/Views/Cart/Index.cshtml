@@ -1,0 +1,26 @@
+﻿@model WebshopTemplate.Models.Cart
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cart</h1>
+
+<table class="table">
+    <tbody>
+@foreach (var item in Model.Products) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a asp-action="RemoveProduct" asp-route-id="@item.Product.Id">X</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

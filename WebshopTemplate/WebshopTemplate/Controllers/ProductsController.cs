@@ -13,6 +13,8 @@ using WebshopTemplate.Filters;
 using WebshopTemplate.ViewModels;
 using WebshopTemplate.ViewModels.Products;
 using WebshopTemplate.ViewModels.Layout;
+using Microsoft.AspNetCore.Identity;
+using WebshopTemplate.Areas.Identity.Data;
 
 namespace WebshopTemplate.Controllers
 {
@@ -21,12 +23,14 @@ namespace WebshopTemplate.Controllers
         private readonly WebshopTemplateContext _context;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly UserManager<WebshopTemplateUser> _userManager;
 
-        public ProductsController(WebshopTemplateContext context, IProductService productService, ICategoryService categoryService)
+        public ProductsController(WebshopTemplateContext context, IProductService productService, ICategoryService categoryService, UserManager<WebshopTemplateUser> userManager)
         {
             _context = context;
             _productService = productService;
             _categoryService = categoryService;
+            _userManager = userManager;
         }
 
         // GET: Products
@@ -158,6 +162,15 @@ namespace WebshopTemplate.Controllers
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToWishlist(int id, int amount)
+        {
+            WebshopTemplateUser user = await _userManager.GetUserAsync(User);
+            if(user == null)
+                return NotFound();
+            return View();
         }
 
         private bool ProductExists(int id)

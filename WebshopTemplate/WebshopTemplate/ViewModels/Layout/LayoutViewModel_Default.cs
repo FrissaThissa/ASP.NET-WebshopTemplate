@@ -8,6 +8,8 @@ namespace WebshopTemplate.ViewModels.Layout
         private readonly ICategoryService _categoryService;
 
         public List<Category> Categories { get; private set; }
+        public Wishlist Wishlist { get; private set; }
+        public Cart Cart { get; private set; }
 
         public LayoutViewModel_Default(ICategoryService categoryService)
         {

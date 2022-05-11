@@ -15,7 +15,8 @@ builder.Services.AddDefaultIdentity<WebshopTemplateUser>(options => options.Sign
 builder.Services.AddControllersWithViews(options => options.Filters.Add<LayoutViewModelActionFilter>());
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IWishlistService, WishlistService>();
 
 var app = builder.Build();
 

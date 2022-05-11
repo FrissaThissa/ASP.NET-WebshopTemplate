@@ -26,7 +26,7 @@ namespace WebshopTemplate.Services
 
         public Product GetProductById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Products.Where(p => p.Id == id).FirstOrDefault();
         }
 
         public List<Product> GetProductsByCategory(Category category)

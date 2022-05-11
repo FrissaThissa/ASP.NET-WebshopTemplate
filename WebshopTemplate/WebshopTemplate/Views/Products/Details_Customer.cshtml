@@ -29,4 +29,13 @@
         string imagesrc = string.Format("data:image/png;base64,{0}", image.Base64);
         <img src="@imagesrc" style="width:100px;height:100px;"/>
     }
+    <form method="post" asp-controller="Cart" asp-action="AddProduct">
+        <input type="hidden" value="@Model.Product.Id" name="id"/>
+        <input type="number" id="amount" name="amount"/>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+    
+    <a class="fa fa-heart" asp-controller="Wishlist" asp-action="AddProduct" asp-route-id="@Model.Product.Id"></a>
 </div>
