@@ -21,6 +21,8 @@ namespace WebshopTemplate.Models
 
         [FromForm]
         [NotMapped]
-        public IFormFileCollection? Files { get; set; }
+        public IFormFileCollection? Files { get; set; }        
+        [NotMapped]
+        public string? BrandName { get; set; }
     }
 }

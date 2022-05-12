@@ -23,6 +23,7 @@ public class WebshopTemplateContext : IdentityDbContext<WebshopTemplateUser>
 
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Product>? Products { get; set; }
+    public DbSet<Brand>? Brands { get; set; }
     public DbSet<Cart>? Carts { get; set; }
     public DbSet<Wishlist>? Wishlists { get; set; }
     public DbSet<Cart_Product> Cart_Products { get; set; }

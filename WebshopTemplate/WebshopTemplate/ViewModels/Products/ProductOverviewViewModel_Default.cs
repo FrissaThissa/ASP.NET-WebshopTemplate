@@ -7,12 +7,15 @@ namespace WebshopTemplate.ViewModels.Products
     {
         private readonly IProductService _productService;
 
+        public ProductFilter Filter { get; private set; }
         public List<Product> Products { get; private set; }
 
-        public ProductOverviewViewModel_Default(IProductService productService, ICategoryService categoryService)
+        public ProductOverviewViewModel_Default(IProductService productService, ICategoryService categoryService, ProductFilter filter)
         {
             _productService = productService;
+            Filter = filter;
             Products = _productService.GetAllProducts();
+            filter.SetBrands(Products);
         }
     }
 }

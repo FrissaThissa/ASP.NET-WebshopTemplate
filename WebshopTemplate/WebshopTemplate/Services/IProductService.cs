@@ -1,4 +1,4 @@
-﻿using WebshopTemplate.Filters;
+﻿using WebshopTemplate.ViewModels.Products;
 using WebshopTemplate.Models;
 
 namespace WebshopTemplate.Services

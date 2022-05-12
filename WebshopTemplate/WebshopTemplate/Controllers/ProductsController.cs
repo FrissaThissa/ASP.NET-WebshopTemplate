@@ -23,20 +23,22 @@ namespace WebshopTemplate.Controllers
         private readonly WebshopTemplateContext _context;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
         private readonly UserManager<WebshopTemplateUser> _userManager;
 
-        public ProductsController(WebshopTemplateContext context, IProductService productService, ICategoryService categoryService, UserManager<WebshopTemplateUser> userManager)
+        public ProductsController(WebshopTemplateContext context, IProductService productService, ICategoryService categoryService, IBrandService brandService, UserManager<WebshopTemplateUser> userManager)
         {
             _context = context;
             _productService = productService;
             _categoryService = categoryService;
+            _brandService = brandService;
             _userManager = userManager;
         }
 
         // GET: Products
         public async Task<IActionResult> Index([FromQuery] ProductFilter filter)
         {
-            ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService);
+            ProductOverviewViewModel_Default model = new ProductOverviewViewModel_Default(_productService, _categoryService, filter);
             return View("Index_Customer", model);
         }
 
@@ -64,7 +66,8 @@ namespace WebshopTemplate.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            return View();
+            ProductCreateViewModel model = new ProductCreateViewModel(_brandService);
+            return View(model);
         }
 
         // POST: Products/Create
@@ -77,6 +80,7 @@ namespace WebshopTemplate.Controllers
             if (ModelState.IsValid)
             {
                 _productService.HandleProductImages(product);
+                product.Brand = _brandService.GetBrandByName(product.BrandName);
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -162,15 +166,6 @@ namespace WebshopTemplate.Controllers
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddToWishlist(int id, int amount)
-        {
-            WebshopTemplateUser user = await _userManager.GetUserAsync(User);
-            if(user == null)
-                return NotFound();
-            return View();
         }
 
         private bool ProductExists(int id)
