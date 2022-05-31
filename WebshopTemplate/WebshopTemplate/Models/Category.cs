@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebshopTemplate.Models
 {
@@ -6,7 +7,10 @@ namespace WebshopTemplate.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        [Required]
+        public string? Name { get; set; }
+        [ForeignKey("Categories")]
+        public int? ParentCategoryId { get; set; }
         public Category? ParentCategory { get; set; }
     }
 }

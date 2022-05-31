@@ -8,8 +8,9 @@ namespace WebshopTemplate.Services
         public List<Product> GetAllProducts();
         public List<Product> GetProductsByCategory(Category category);
         public Product GetProductById(int id);
-        public void CreateProduct();
         public List<Product> GetProductsByFilter(ProductFilter filter);
+        public void CreateProduct(Product product);
+        public void UpdateProduct(Product product);
         public void HandleProductImages(Product product);
     }
 }

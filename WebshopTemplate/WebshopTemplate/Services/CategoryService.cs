@@ -12,9 +12,14 @@ namespace WebshopTemplate.Services
             _context = context;
         }
 
-        public void CreateCategory()
+        public void CreateCategory(Category category)
         {
             throw new NotImplementedException();
+        }
+
+        public void UpdateCategory(Category category)
+        {
+
         }
 
         public List<Category> GetAllCategories()
@@ -29,12 +34,27 @@ namespace WebshopTemplate.Services
 
         public List<Category> GetHeadCategories()
         {
-            throw new NotImplementedException();
+            return _context.Categories.Where(c => c.ParentCategory == null).ToList();
+        }
+
+        public List<Category> GetHeadCategories(Category category)
+        {
+            return _context.Categories.Where(c => c.ParentCategory == null).Where(c => c.Id != category.Id).ToList();
         }
 
         public List<Category> GetSubCategories(Category category)
         {
             throw new NotImplementedException();
+        }
+
+        public Category GetCategoryByName(string name)
+        {
+            return _context.Categories.Where(c => c.Name == name).FirstOrDefault();
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            return _context.Categories.Where(c => c.Id == id).FirstOrDefault();
         }
     }
 }

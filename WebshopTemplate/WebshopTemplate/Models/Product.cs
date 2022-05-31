@@ -8,21 +8,23 @@ namespace WebshopTemplate.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        [ForeignKey("Categories")]
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+        [ForeignKey("Brands")]
+        public int? BrandId { get; set; }
         public Brand? Brand { get; set; }
         public double Price { get; set; }
         public double Weight { get; set; }
         public string? Size { get; set; }
         public List<Image>? Images { get; set; }
 
-        public List<Cart>? Carts { get; set; }
         public List<Wishlist>? Wishlists { get; set; }
 
         [FromForm]
         [NotMapped]
-        public IFormFileCollection? Files { get; set; }        
-        [NotMapped]
-        public string? BrandName { get; set; }
+        public IFormFileCollection? Files { get; set; }
     }
 }

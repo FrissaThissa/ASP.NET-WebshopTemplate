@@ -3,15 +3,17 @@ using WebshopTemplate.Services;
 
 namespace WebshopTemplate.ViewModels.Products
 {
-    public class ProductCreateViewModel
+    public class ProductCreateEditViewModel
     {
         public Product Product { get; set; }
         public List<Brand> Brands { get; set; }
+        public List<Category> Categories { get; set; }
 
-        public ProductCreateViewModel(IBrandService brandService)
+        public ProductCreateEditViewModel(IBrandService brandService, ICategoryService categoryService)
         {
             Product = new Product();
             Brands = brandService.GetAllBrands();
+            Categories = categoryService.GetAllCategories();
         }
     }
 }

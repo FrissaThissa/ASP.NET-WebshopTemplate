@@ -15,6 +15,8 @@ namespace WebshopTemplate.ViewModels.Products
             Brands = new Dictionary<Brand, int>();
             foreach (var product in products)
             {
+                if (product.Brand == null)
+                    continue;
                 if (Brands.ContainsKey(product.Brand))
                     Brands[product.Brand]++;
                 else

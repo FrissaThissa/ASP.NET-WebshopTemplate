@@ -14,9 +14,11 @@ namespace WebshopTemplate.Services
             _context = context;
         }
 
-        public void CreateProduct()
+        public void CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            HandleProductImages(product);
+            _context.Add(product);
+            _context.SaveChanges();
         }
 
         public List<Product> GetAllProducts()
@@ -26,7 +28,7 @@ namespace WebshopTemplate.Services
 
         public Product GetProductById(int id)
         {
-            return _context.Products.Where(p => p.Id == id).FirstOrDefault();
+            return _context.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == id);
         }
 
         public List<Product> GetProductsByCategory(Category category)
@@ -37,6 +39,11 @@ namespace WebshopTemplate.Services
         public List<Product> GetProductsByFilter(ProductFilter filter)
         {
             return _context.Products.Include(p => p.Brand).ToList();
+        }
+
+        public void UpdateProduct(Product product)
+        {
+
         }
 
         public async void HandleProductImages(Product product)
