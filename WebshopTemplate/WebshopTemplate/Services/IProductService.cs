@@ -7,6 +7,7 @@ namespace WebshopTemplate.Services
     {
         public List<Product> GetAllProducts();
         public List<Product> GetProductsByCategory(Category category);
+        public List<Product> GetProductsByCategory(int categoryid);
         public Product GetProductById(int id);
         public List<Product> GetProductsByFilter(ProductFilter filter);
         public void CreateProduct(Product product);

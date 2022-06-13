@@ -21,5 +21,10 @@ namespace WebshopTemplate.Services
         {
             return _context.Brands.ToList();
         }
+
+        public Brand GetBrandById(int id)
+        {
+            return _context.Brands.Where(b => b.Id == id).FirstOrDefault();
+        }
     }
 }

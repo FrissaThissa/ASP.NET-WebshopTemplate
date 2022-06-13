@@ -23,12 +23,17 @@ namespace WebshopTemplate.Services
 
         public List<Product> GetAllProducts()
         {
-            return _context.Products.Include(p => p.Images).Include(p => p.Brand).ToList();
+            return _context.Products
+                .Include(p => p.Images)
+                .Include(p => p.Brand)
+                .ToList();
         }
 
         public Product GetProductById(int id)
         {
-            return _context.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == id);
+            return _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public List<Product> GetProductsByCategory(Category category)
@@ -36,9 +41,19 @@ namespace WebshopTemplate.Services
             throw new NotImplementedException();
         }
 
+        public List<Product> GetProductsByCategory(int categoryid)
+        {
+            return _context.Products
+                .Where(p => p.CategoryId == categoryid)
+                .Include(p => p.Images)
+                .ToList();
+        }
+
         public List<Product> GetProductsByFilter(ProductFilter filter)
         {
-            return _context.Products.Include(p => p.Brand).ToList();
+            return _context.Products
+                .Include(p => p.Brand)
+                .ToList();
         }
 
         public void UpdateProduct(Product product)

@@ -6,5 +6,6 @@ namespace WebshopTemplate.Services
     {
         public Brand GetBrandByName(string name);
         public List<Brand> GetAllBrands();
+        public Brand GetBrandById(int id);
     }
 }

@@ -24,9 +24,21 @@
             {
                 <li class="col-md-3">
                     <div class="productcard text-center border rounded">
-                        <a asp-action="Details" asp-route-id="@product.Id" />
+                        <a class="productcard" asp-action="Details" asp-route-id="@product.Id" />
                         <img src="@string.Format("data:image/png;base64,{0}", product.Images[0].Base64)" style="width:100px;height:100px;"/>
                         <p>@product.Name</p>
+                        <div class="row">
+                            <div class="col-md-6">@product.Price</div>
+                            <div class="col-md-6">
+                                <form method="post" asp-controller="Cart" asp-action="AddProduct">
+                                    <input type="hidden" value="@product.Id" name="id"/>
+                                    <input type="hidden" value="1" name="amount" />
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart nav-link text-dark"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </li>
             }
