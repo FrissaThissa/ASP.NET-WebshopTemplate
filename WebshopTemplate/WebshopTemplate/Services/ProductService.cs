@@ -2,16 +2,21 @@
 using WebshopTemplate.ViewModels.Products;
 using WebshopTemplate.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace WebshopTemplate.Services
 {
     public class ProductService : IProductService
     {
         private readonly WebshopTemplateContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductService(WebshopTemplateContext context)
+        public ProductService(WebshopTemplateContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public void CreateProduct(Product product)
@@ -64,13 +69,27 @@ namespace WebshopTemplate.Services
         public async void HandleProductImages(Product product)
         {
             //create a Photo list to store the upload files.
-            List<Image> images = new List<Image>();
             if (product.Files.Count > 0)
             {
                 foreach (var formFile in product.Files)
                 {
                     if (formFile.Length > 0)
                     {
+                        string filename = Path.GetFileName(formFile.FileName);
+                        string fileId = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
+                        string localpath = "images/" + fileId;
+                        string path = Path.Combine(_webHostEnvironment.WebRootPath, "images", fileId);
+                        using (var stream = System.IO.File.Create(path))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                        if (product.Images == null)
+                            product.Images = new List<Image>();
+
+                        Image image = new Image { Path = localpath, OriginalFileName = filename };
+
+                        product.Images.Add(image);
+                        /*
                         using (var memoryStream = new MemoryStream())
                         {
                             await formFile.CopyToAsync(memoryStream);
@@ -92,11 +111,12 @@ namespace WebshopTemplate.Services
                                 images.Add(image);
                             }
                         }
+                        */
                     }
                 }
             }
             //assign the photos to the Product, using the navigation property.
-            product.Images = images;
+            //product.Images = images;
         }
     }
 }

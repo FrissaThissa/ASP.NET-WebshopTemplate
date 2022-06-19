@@ -26,8 +26,7 @@
     </dl>
     @foreach(Image image in Model.Product.Images)
     {
-        string imagesrc = string.Format("data:image/png;base64,{0}", image.Base64);
-        <img src="@imagesrc" style="width:100px;height:100px;"/>
+        <asp:Image src="~/@image.Path" style="width:100px;height:100px;"/>
     }
     <form method="post" asp-controller="Cart" asp-action="AddProduct">
         <input type="hidden" value="@Model.Product.Id" name="id"/>

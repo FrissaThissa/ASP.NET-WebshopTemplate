@@ -19,6 +19,7 @@ namespace WebshopTemplate.Models
         public double Price { get; set; }
         public double Weight { get; set; }
         public string? Size { get; set; }
+        //public List<string>? Images { get; set; }
         public List<Image>? Images { get; set; }
 
         public List<Wishlist>? Wishlists { get; set; }

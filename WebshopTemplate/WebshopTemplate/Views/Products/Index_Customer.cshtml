@@ -25,7 +25,7 @@
                 <li class="col-md-3">
                     <div class="productcard text-center border rounded">
                         <a class="productcard" asp-action="Details" asp-route-id="@product.Id" />
-                        <img src="@string.Format("data:image/png;base64,{0}", product.Images[0].Base64)" style="width:100px;height:100px;"/>
+                        <img src="~/@product.Images[0].Path" style="width:100px;height:100px;"/>
                         <p>@product.Name</p>
                         <div class="row">
                             <div class="col-md-6">@product.Price</div>
