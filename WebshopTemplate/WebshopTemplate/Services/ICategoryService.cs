@@ -11,6 +11,7 @@ namespace WebshopTemplate.Services
         public List<Category> GetHeadCategories();
         public List<Category> GetHeadCategories(Category category);
         public List<Category> GetSubCategories(Category category);
+        public List<Category> GetSubCategories(int parentCategoryId);
         public void CreateCategory(Category category);
         public void UpdateCategory(Category category);
     }

@@ -34,9 +34,12 @@ namespace WebshopTemplate.Controllers
         }
 
         [HttpGet("api/categories")]
-        public ActionResult<IEnumerable<Category>> Categories()
+        public ActionResult<IEnumerable<Category>> Categories([FromQuery]int? parentcategoryid)
         {
-            return _categoryService.GetAllCategories();
+            if (parentcategoryid == null)
+                return _categoryService.GetAllCategories();
+            else
+                return _categoryService.GetSubCategories((int)parentcategoryid);
         }
 
         [HttpGet("api/categories/{id}")]

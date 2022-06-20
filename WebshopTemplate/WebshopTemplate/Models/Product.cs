@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebshopTemplate.Models
 {
@@ -11,9 +12,11 @@ namespace WebshopTemplate.Models
         public string? Name { get; set; }
         public string? Description { get; set; }
         [ForeignKey("Categories")]
+        [JsonIgnore]
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
         [ForeignKey("Brands")]
+        [JsonIgnore]
         public int? BrandId { get; set; }
         public Brand? Brand { get; set; }
         public double Price { get; set; }
@@ -22,10 +25,12 @@ namespace WebshopTemplate.Models
         //public List<string>? Images { get; set; }
         public List<Image>? Images { get; set; }
 
+        [JsonIgnore]
         public List<Wishlist>? Wishlists { get; set; }
 
         [FromForm]
         [NotMapped]
+        [JsonIgnore]
         public IFormFileCollection? Files { get; set; }
     }
 }

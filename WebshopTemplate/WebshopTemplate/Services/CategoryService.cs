@@ -47,6 +47,11 @@ namespace WebshopTemplate.Services
             throw new NotImplementedException();
         }
 
+        public List<Category> GetSubCategories(int parentCategoryId)
+        {
+            return _context.Categories.Where(c => c.ParentCategoryId == parentCategoryId).ToList();
+        }
+
         public Category GetCategoryByName(string name)
         {
             return _context.Categories.Where(c => c.Name == name).FirstOrDefault();

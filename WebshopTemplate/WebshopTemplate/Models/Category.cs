@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebshopTemplate.Models
 {
@@ -10,6 +11,7 @@ namespace WebshopTemplate.Models
         [Required]
         public string? Name { get; set; }
         [ForeignKey("Categories")]
+        [JsonIgnore]
         public int? ParentCategoryId { get; set; }
         public Category? ParentCategory { get; set; }
     }
